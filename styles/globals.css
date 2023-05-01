@@ -15,12 +15,16 @@
     @apply text-3xl text-[#ECB365];
   }
 
+  .markdown a{
+    @apply underline hover:text-cyan-300 transition-all duration-200;
+  }
+
   .markdown ul, .markdown ol {
     @apply pl-12;
   }
 
   .markdown ul li {
-    @apply list-disc text-[#d54513];
+    @apply list-disc text-[#4B5D67];
   }
 
   .markdown ul li ul {

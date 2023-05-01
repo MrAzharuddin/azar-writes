@@ -1,9 +1,11 @@
+import codeHighlighter from "@/components/codeHighlighter";
 import { getAllPublished, getSingleBlogPost } from "@/lib/notion";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
+
 
 function Post({ post }) {
   //   console.log(post.post);
@@ -36,7 +38,13 @@ function Post({ post }) {
           </div>
         </div>
         <article>
-          <ReactMarkdown className="markdown" remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            className="markdown"
+            components={{
+              code: codeHighlighter,
+            }}
+            remarkPlugins={[remarkGfm]}
+          >
             {post.markdown}
           </ReactMarkdown>
         </article>
