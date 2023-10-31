@@ -14,7 +14,7 @@ const removeUndefinedAndConcat = (text) => {
 };
 
 function Post({ post }) {
-  // console.log(post.markdown);
+  console.log(post.post);
   const result = removeUndefinedAndConcat(post.markdown.parent);
   // console.log(result);
   // console.log(readingTime(post.markdown));
@@ -43,15 +43,20 @@ function Post({ post }) {
           {/* Tags */}
           <div>
             <div className="p-8 flex justify-between items-center">
-              <Link href="/" className="flex items-center gap-2 no-underline">
+              {/* <Link href="/" className="flex items-center gap-2 no-underline">
                 <img src="/larrow.svg" className="w-4" />
                 <span>
                   <p className="no-underline">Back</p>
                 </span>
-              </Link>
-              <div className="text-slate-600 text-center">
-                <p className="text-lg font-semibold">{post.post.date}</p>
-                <p className="text-base ">{readtime.text}</p>
+              </Link> */}
+              <div>
+                <div>
+                  <p>Author: Azar M</p>
+                </div>
+                <div className="flex items-center gap-2 divide-x-2 divide-black/60">
+                  <p className="md:text-lg text-sm font-semibold">{post.post.created_time}</p>
+                  <p className="md:text-base text-xs pl-2">{readtime.text}</p>
+                </div>
               </div>
             </div>
           </div>
