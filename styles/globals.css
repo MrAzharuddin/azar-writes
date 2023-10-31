@@ -6,21 +6,24 @@
 
 @layer components {
   .markdown {
-    @apply md:w-1/2 space-y-6 text-lg w-full mx-auto py-8 text-[#4B5D67];
+    @apply lg:w-1/2 md:w-4/5 space-y-6 lg:text-lg sm:text-base text-sm w-full mx-auto py-8 text-[#4B5D67] md:px-0 px-6;
   }
   .markdown h1 {
-    @apply text-5xl text-[#041C32] text-center;
+    @apply lg:text-5xl md:text-3xl text-2xl text-[#041C32] text-center;
   }
   .markdown h3 {
-    @apply text-3xl text-[#ECB365];
+    @apply md:text-2xl text-lg  text-[#ECB365] py-2;
+  }
+  .markdown .prose p{
+    @apply py-2;
   }
 
   .markdown a{
-    @apply underline hover:text-cyan-300 transition-all duration-200;
+    @apply hover:underline hover:text-cyan-300 transition-all duration-200;
   }
 
   .markdown ul, .markdown ol {
-    @apply pl-12;
+    @apply lg:pl-12 md:pl-6 pl-3 ;
   }
 
   .markdown ul li {
@@ -28,7 +31,7 @@
   }
 
   .markdown ul li ul {
-    @apply pl-12;
+    @apply lg:pl-12 md:pl-6 pl-3;
   }
 
   .markdown ul li ul li {
@@ -40,24 +43,26 @@
   }
 
   .markdown table {
-    @apply w-full table table-auto divide-y divide-gray-200 overflow-x-auto space-y-3 border-2;
+    @apply min-w-full table-auto border-black/30 divide-y-2 divide-black/30 overflow-x-scroll space-y-1 border-2 block border-collapse rounded-md;
   }
 
   .markdown table thead,
   .markdown table tbody {
-    @apply divide-y divide-gray-200 w-full;
+    @apply  w-full;
   }
   .markdown table th{
-    @apply text-[#0F3460] font-bold;
+    @apply text-[#0F3460] bg-gray-100 font-bold;
   }
   .markdown table td{
-    @apply text-[#362222]
+    @apply text-[#362222] py-0.5 ;
   }
   .markdown table th, .markdown table td {
-    @apply px-3 text-center w-full border-r-2;
+    @apply px-3 text-center w-max;
   }
 }
 
-body{
-  @apply font-Mukta;
+@layer base{
+  body{
+    @apply font-Mukta;
+  }
 }
