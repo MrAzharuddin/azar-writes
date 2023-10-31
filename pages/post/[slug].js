@@ -5,12 +5,20 @@ import Link from "next/link";
 import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import readingTime from "reading-time";
+import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
+const removeUndefinedAndConcat = (text) => {
+  const contentWithoutUndefined = text.replace(/undefined/g, '');
+  return contentWithoutUndefined.trim();
+};
+
 function Post({ post }) {
-  //   console.log(post.post);
+  // console.log(post.markdown);
+  const result = removeUndefinedAndConcat(post.markdown.parent);
+  // console.log(result);
   // console.log(readingTime(post.markdown));
-  let readtime = readingTime(post.markdown)
+  let readtime = readingTime(post.markdown.parent)
   return (
     <>
       <Head>
@@ -29,30 +37,33 @@ function Post({ post }) {
         <meta name={"og:image"} title={"og:image"} content={post.post.cover} />
       </Head>
       <section>
-        <div>
-          <div className="p-8 flex justify-between items-center">
-            <Link href="/" className="flex items-center gap-4">
-              <img src="/larrow.svg" className="w-6" />
-              <span>
-                <p>Back</p>
-              </span>
-            </Link>
-            <div className="text-slate-600 text-center">
-              <p className="text-lg font-semibold">{post.post.date}</p>
-              <p className="text-base">{readtime.text}</p>
+        <article className="markdown">
+          {/* Title */}
+          <h1 className="font-black">{post.post.title}</h1>
+          {/* Tags */}
+          <div>
+            <div className="p-8 flex justify-between items-center">
+              <Link href="/" className="flex items-center gap-2 no-underline">
+                <img src="/larrow.svg" className="w-4" />
+                <span>
+                  <p className="no-underline">Back</p>
+                </span>
+              </Link>
+              <div className="text-slate-600 text-center">
+                <p className="text-lg font-semibold">{post.post.date}</p>
+                <p className="text-base ">{readtime.text}</p>
+              </div>
             </div>
-            <div></div>
           </div>
-        </div>
-        <article>
           <ReactMarkdown
-            className="markdown"
+            className="prose lg:prose-xl"
             components={{
               code: codeHighlighter,
             }}
             remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw]}
           >
-            {post.markdown}
+            {result}
           </ReactMarkdown>
         </article>
       </section>
@@ -75,7 +86,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const post = await getSingleBlogPost(params.slug);
-  // console.log(post);
   return {
     props: {
       post,
